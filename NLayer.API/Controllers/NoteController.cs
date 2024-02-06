@@ -25,7 +25,7 @@ namespace NLayer.API.Controllers
 		public async Task<IActionResult> GetAll()
 		{
 			var notes = await _service.GetAllAsync();
-			var notesDto = _mapper.Map<NoteDto>(notes);
+			var notesDto = _mapper.Map<List<NoteDto>>(notes);
 			return Ok(notesDto);
 		}
 
