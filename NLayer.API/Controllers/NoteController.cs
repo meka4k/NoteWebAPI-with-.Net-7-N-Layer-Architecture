@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.Core.DTOs;
@@ -9,6 +11,7 @@ namespace NLayer.API.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 	public class NoteController : ControllerBase
 	{
 		private readonly IMapper _mapper;
@@ -22,6 +25,7 @@ namespace NLayer.API.Controllers
 
 
 		[HttpGet]
+		
 		public async Task<IActionResult> GetAll()
 		{
 			var notes = await _service.GetAllAsync();
@@ -56,6 +60,10 @@ namespace NLayer.API.Controllers
 		public async Task<IActionResult> Remove(int id)
 		{
 			var note = await _service.GetByIdAsync(id);
+			if (note == null)
+			{
+				return NotFound("User not found");
+			}
 			await _service.RemoveAsync(note);
 			return Ok();
 		}
