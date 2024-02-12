@@ -1,14 +1,5 @@
 ﻿@model LoginUser
-@{
-	var successMessage = ViewBag.SuccessMessage as string;
-}
 
-@if (!string.IsNullOrEmpty(successMessage))
-{
-	<div class="alert alert-success">
-		@successMessage
-	</div>
-}
 
 <!doctype html>
 <html lang="en">
@@ -29,7 +20,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Login</h2>
+					<h2 class="heading-section">Sign Up</h2>
 				</div>
 			</div>
 			<div class="row justify-content-center">
@@ -38,8 +29,8 @@
 						<div class="icon d-flex align-items-center justify-content-center">
 							<span class="fa fa-user-o"></span>
 						</div>
-						<h3 class="text-center mb-4">Sign In</h3>
-						<form asp-action="Login" asp-controller="Account" class="login-form">
+						<h3 class="text-center mb-4">Sign Up</h3>
+						<form asp-action="Register" asp-controller="Account" class="login-form">
 							<div class="form-group">
 								<input type="text" asp-for="UserName" class="form-control rounded-left" placeholder="Email" required>
 							</div>
@@ -47,17 +38,15 @@
 								<input type="password" asp-for="Password" class="form-control rounded-left" placeholder="Password" required>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="form-control btn btn-primary rounded submit px-3">Login</button>
+								<button type="submit" class="form-control btn btn-primary rounded submit px-3">Register</button>
 							</div>
 							<div class="form-group d-md-flex">
 								<div class="w-50">
 								</div>
 								<div class="w-50 text-md-right">
-									<a href="/Account/Register">Sign Up</a>
+									<a href="/Account/Login">Sign In</a>
 								</div>
 							</div>
-
-
 						</form>
 					</div>
 				</div>

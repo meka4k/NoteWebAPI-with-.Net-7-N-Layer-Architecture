@@ -43,6 +43,37 @@ namespace NLayer.Web.Controllers
 			return View(model);
 		}
 
+		[HttpGet]
+		public IActionResult Register()
+		{
+			return View();
+		}
+
+
+		[HttpPost]
+		public async Task<IActionResult> Register(LoginUser loginUser)
+		{
+			if (!ModelState.IsValid)
+				return View(loginUser);
+
+			using (var client = _httpClientFactory.CreateClient())
+			{
+				var jsonData = JsonConvert.SerializeObject(loginUser);
+				var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+				var messageResponse = await client.PostAsync("https://localhost:7185/api/auth/Register", stringContent);
+
+				if (messageResponse.IsSuccessStatusCode)
+				{
+					ViewBag.SuccessMessage = "Successfully Done";
+					return RedirectToAction("Login");
+				}
+			}
+
+			return View();
+
+		}
+
 		private async Task<string> GetTokenAsync(string email, string password)
 		{
 			using (var client = _httpClientFactory.CreateClient())
