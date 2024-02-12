@@ -14,5 +14,6 @@ public class MapProfile : Profile
 	public MapProfile()
 	{
 		CreateMap<Note, NoteDto>().ReverseMap();
+		CreateMap<Note, CreateNoteDto>().ReverseMap();
 	}
 }
